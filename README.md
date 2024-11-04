@@ -1,3 +1,7 @@
+# Claro dev SpringBoot
+Java RESTful API criada para finalizar o curso Springboot claro
+
+```mermaid
 classDiagram
     class User {
         +String name
@@ -32,3 +36,4 @@ classDiagram
     User --> Tournament : follows
     Game --> Team : has
     Game --> Tournament : part of
+```
