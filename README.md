@@ -31,7 +31,7 @@ classDiagram
     }
 
    
-    User --> Team : favorite team
+    User "1" --> "1" Team : favorite team
     User --> Game : attends
     User --> Tournament : follows
     Game --> Team : has
