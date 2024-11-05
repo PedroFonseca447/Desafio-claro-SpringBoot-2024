@@ -3,7 +3,6 @@ package com.desafio.dioSpringbootclaro.Desafio_claro.domain.model;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -33,9 +32,8 @@ public class User {
      @JsonIgnore
     private Team team;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL) 
     @JoinColumn(name = "user_id")
-     @JsonManagedReference 
     private List<Game> games; 
 
   
