@@ -2,7 +2,6 @@ package com.desafio.dioSpringbootclaro.Desafio_claro.domain.model;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,7 +28,7 @@ public class Game {
     private Team awayTeam;
     private String score;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "tournament_id") // Define a coluna de chave estrangeira para o torneio
     private Tournament tournament;
 

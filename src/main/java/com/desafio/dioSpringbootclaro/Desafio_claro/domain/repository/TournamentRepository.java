@@ -10,4 +10,6 @@ import com.desafio.dioSpringbootclaro.Desafio_claro.domain.model.Tournament;
 public interface TournamentRepository extends JpaRepository<Tournament, Long> {
     // Métodos adicionais, como busca de torneio por nome
     Optional<Tournament> findByName(String name);
+
+    
 }
