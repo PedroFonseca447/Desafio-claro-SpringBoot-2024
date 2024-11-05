@@ -1,20 +1,19 @@
 spring:
   datasource:
     url: jdbc:h2:mem:claro2024
-    driverClassName: org.h2.Driver
     username: claro2024
-    password: cl
+    password: 
   jpa:
     show-sql: true
     open-in-view: false
     hibernate:
-      ddl-auto: create-drop  # cria e remove o banco a cada execução de teste
+      ddl-auto: create  # cria e remove o banco a cada execução de teste
     properties:
       hibernate:
         format_sql: true
   h2:
     console:
-      enable: true
+      enabled: true
       path: /h2-console
       settings:
         trace: false
