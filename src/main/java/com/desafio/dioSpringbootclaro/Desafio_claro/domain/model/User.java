@@ -1,5 +1,6 @@
 package com.desafio.dioSpringbootclaro.Desafio_claro.domain.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -31,7 +32,7 @@ public class User {
 
     @OneToMany(cascade = CascadeType.ALL) 
     @JoinColumn(name = "user_id")
-    private List<Game> games; 
+    private List<Game> games = new ArrayList<>();
 
   
 
