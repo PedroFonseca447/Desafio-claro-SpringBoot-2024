@@ -2,8 +2,6 @@ package com.desafio.dioSpringbootclaro.Desafio_claro.domain.model;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -27,9 +25,8 @@ public class User {
     private Integer idade;
     private String cidade;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "team_id")
-     @JsonIgnore
     private Team team;
 
     @OneToMany(cascade = CascadeType.ALL) 
