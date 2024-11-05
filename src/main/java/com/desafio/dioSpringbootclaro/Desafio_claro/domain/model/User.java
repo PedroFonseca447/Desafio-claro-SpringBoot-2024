@@ -2,6 +2,9 @@ package com.desafio.dioSpringbootclaro.Desafio_claro.domain.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -25,12 +28,14 @@ public class User {
     private Integer idade;
     private String cidade;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "team_id", nullable = true)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "team_id")
+     @JsonIgnore
     private Team team;
 
-    @OneToMany(cascade = CascadeType.ALL) 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "user_id")
+     @JsonManagedReference 
     private List<Game> games; 
 
   

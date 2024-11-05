@@ -29,7 +29,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    //pode melhorar para proteger dados usando um dto
+    //funciona em principío
     @GetMapping("/{id}")
     public ResponseEntity<User> findById(@PathVariable Long id){
         var user = userService.findById(id);
@@ -47,20 +47,20 @@ public class UserController {
          //path de onde o usuario foi criado e retorna ele funcionando
         return ResponseEntity.created(location).body(userCreated);
     }
-    
+    //funciona
     @GetMapping("{id}/team")
     public ResponseEntity<Team> getUserTeam(@PathVariable Long id){
         var team = userService.getUserTeam(id);
         return ResponseEntity.ok(team);
     }
-
+    // deu problema 
     @GetMapping("{id}/games")
     public ResponseEntity<List<Game>> getUserGames(@PathVariable Long id) {
         List<Game> games = userService.getUserGames(id);
         return ResponseEntity.ok(games);
     }
-
-
+    
+    //funciona
     @PostMapping("/{id}/games")
     public User addGamesToUser(@PathVariable Long id, @RequestBody List<Game> gamesToAdd) {
         return userService.addGamesToUser(id, gamesToAdd);

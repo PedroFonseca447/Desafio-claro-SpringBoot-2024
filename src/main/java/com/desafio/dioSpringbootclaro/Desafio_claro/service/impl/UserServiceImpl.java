@@ -60,7 +60,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<Game> getUserGames(Long userId) {
-        return userRepository.getUserGames(userId);
+        User user = userRepository.findById(userId)
+                      .orElseThrow(() -> new NoSuchElementException("User not found"));
+    
+        // Inicializa a lista de jogos para evitar LazyInitializationException
+        List<Game> games = user.getGames();
+        games.size(); // Força a inicialização
+    
+        return games;
     }
 
     @Transactional
