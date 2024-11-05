@@ -3,6 +3,7 @@ package com.desafio.dioSpringbootclaro.Desafio_claro.controller;
 import java.net.URI;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -62,8 +63,8 @@ public class UserController {
     
     //funciona
     @PostMapping("/{id}/games")
-    public User addGamesToUser(@PathVariable Long id, @RequestBody List<Game> gamesToAdd) {
-        return userService.addGamesToUser(id, gamesToAdd);
+    public ResponseEntity<List<Game>> addGamesToUser(@PathVariable Long id, @RequestBody List<Game> gamesToAdd) {
+        List<Game> addedGames = userService.addGamesToUser(id, gamesToAdd);
+        return ResponseEntity.status(HttpStatus.CREATED).body(addedGames);
     }
-
 }

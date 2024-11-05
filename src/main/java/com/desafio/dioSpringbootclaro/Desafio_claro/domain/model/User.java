@@ -30,8 +30,7 @@ public class User {
     @JoinColumn(name = "team_id")
     private Team team;
 
-    @OneToMany(cascade = CascadeType.ALL) 
-    @JoinColumn(name = "user_id")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Game> games = new ArrayList<>();
 
   

@@ -72,54 +72,55 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public User addGamesToUser(Long userId, List<Game> gamesToAdd) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new NoSuchElementException("User not found"));
+    public List<Game> addGamesToUser(Long userId, List<Game> gamesToAdd) {
+    User user = userRepository.findById(userId)
+            .orElseThrow(() -> new NoSuchElementException("User not found"));
 
-            for(Game game : gamesToAdd){
-                
-                Team homeTeam = game.getHomeTeam();
+    for (Game game : gamesToAdd) {
+        // Verifica e configura homeTeam
+        Team homeTeam = game.getHomeTeam();
+        if (homeTeam != null && homeTeam.getName() != null) {
+            final Team finalHomeTeam = homeTeam;
+            homeTeam = teamRepository.findByName(homeTeam.getName())
+                       .orElseGet(() -> teamRepository.save(finalHomeTeam));
+            game.setHomeTeam(homeTeam);  // Atualiza o jogo com o homeTeam encontrado ou salvo
+        } else {
+            throw new IllegalArgumentException("Home team name must not be null");
+        }
 
-                if (homeTeam != null && homeTeam.getName() != null){
-                    final Team finalHomeTeam = homeTeam;
-                    homeTeam = teamRepository.findByName(homeTeam.getName())
-                    .orElseGet(() -> teamRepository.save(finalHomeTeam));
-                    game.setHomeTeam(homeTeam);
-                } else {
-                    throw  new IllegalArgumentException("HOME TEAM MUST NOT BE NULL");
-                }
+        // Verifica e configura awayTeam
+        Team awayTeam = game.getAwayTeam();
+        if (awayTeam != null && awayTeam.getName() != null) {
+            final Team finalAwayTeam = awayTeam;
+            awayTeam = teamRepository.findByName(awayTeam.getName())
+                       .orElseGet(() -> teamRepository.save(finalAwayTeam));
+            game.setAwayTeam(awayTeam);  // Atualiza o jogo com o awayTeam encontrado ou salvo
+        } else {
+            throw new IllegalArgumentException("Away team name must not be null");
+        }
 
-                Team awayTeam = game.getAwayTeam();
-                if (awayTeam != null && awayTeam.getName() != null) {
-                    final Team finalAwayTeam = awayTeam; // Cria uma variável final temporária
-                    awayTeam = teamRepository.findByName(awayTeam.getName())
-                                .orElseGet(() -> teamRepository.save(finalAwayTeam));
-                    game.setAwayTeam(awayTeam);
-                } else {
-                    throw new IllegalArgumentException("Away team name must not be null");
-                }
+        // Verifica e configura tournament
+        Tournament tournament = game.getTournament();
+        if (tournament != null && tournament.getName() != null) {
+            final Tournament finalTournament = tournament;
 
+            tournament = tournamentRepository.findByName(tournament.getName())
+                          .orElseGet(() -> tournamentRepository.save(finalTournament));
+            game.setTournament(tournament);  // Atualiza o jogo com o torneio encontrado ou salvo
+        } else {
+            throw new IllegalArgumentException("Tournament name must not be null");
+        }
 
-                 Tournament tournament = game.getTournament();
-                    if (tournament != null && tournament.getName() != null) {
-                        final Tournament finalTournament = tournament;
-                        tournament = tournamentRepository.findByName(tournament.getName())
-                                    .orElseGet(() -> tournamentRepository.save(finalTournament));
-                        game.setTournament(tournament);
-                    } else {
-                        throw new IllegalArgumentException("Tournament name must not be null");
-                    }
-                    // Associa o jogo ao usuário
-                        game.setUser(user);
-
-                        // Salva o jogo no repositório
-                        gameRepository.save(game);
-            }
-          
-            user.getGames().addAll(gamesToAdd);
-
-
-
-        return userRepository.save(user);
+        // Associa o usuário ao jogo
+        game.setUser(user);
+        gameRepository.save(game);  // Salva o jogo no repositório
     }
+    
+    user.getGames().addAll(gamesToAdd);
+    userRepository.save(user);  // Salva o usuário atualizado
+
+    return gamesToAdd;  // Retorna apenas os jogos adicionados
+    }
+
 }
+

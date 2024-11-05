@@ -16,5 +16,5 @@ public interface UserService {
 
     List<Game> getUserGames(Long id);
 
-    User addGamesToUser(Long userId, List<Game> gamesToAdd);
+    List<Game> addGamesToUser(Long userId, List<Game> gamesToAdd);
 }
