@@ -1,5 +1,6 @@
 package com.desafio.dioSpringbootclaro.Desafio_claro.domain.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -19,14 +20,13 @@ public class Game {
 
     private String date;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "home_team_id") // Define a coluna de chave estrangeira para o time da casa
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "home_team_id")
     private Team homeTeam;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "away_team_id") // Define a coluna de chave estrangeira para o time visitante
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "away_team_id")
     private Team awayTeam;
-
     private String score;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -83,3 +83,38 @@ public class Game {
         this.tournament = tournament;
     }
 }
+// {
+//     "name": "Pedro Seco",
+//     "idade": 22,
+//     "cidade": "Porto Alegre",
+//     "team": {
+//         "name": "Gremio",
+//         "city": "Rio Grande do Sul",
+//         "stadium": "ARENA DO GREMIO",
+//         "anoFundacao": 1903
+//     },
+//     "games": []
+// }
+
+// [
+//   {
+//     "date": "2024-11-28",
+//     "homeTeam": {
+//       "name": "Gremio",
+//       "city": "Porto Alegre",
+//       "stadium": "ARENA DO GREMIO",
+//       "anoFundacao": 1903
+//     },
+//     "awayTeam": {
+//       "name": "ATL Goianiense",
+//       "city": "Goiania",
+//       "stadium": "Olimpico de Goias",
+//       "anoFundacao": 1940
+//     },
+//     "score": "3-1",
+//     "tournament": {
+//       "name": "Brasileirão",
+//       "country": "Brasil"
+//     }
+//   }
+// ]
