@@ -1,4 +1,4 @@
-package com.desafio.dioSpringbootclaro.Desafio_claro.model;
+package com.desafio.dioSpringbootclaro.Desafio_claro.domain.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
