@@ -30,7 +30,7 @@ public class User {
     @JoinColumn(name = "team_id")
     private Team team;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Game> games = new ArrayList<>();
 
   

@@ -8,13 +8,15 @@ import com.desafio.dioSpringbootclaro.Desafio_claro.domain.model.User;
 
 public interface UserService {
 
-    User findById(Long id);
+    User findById(Long id);//funfa
 
-    User create(User userToCreate);
+    User create(User userToCreate);//funfa
 
-    Team getUserTeam(Long id);
+    Team getUserTeam(Long id);//funfa
 
-    List<Game> getUserGames(Long id);
+    List<Game> getUserGames(Long id);//funfa
 
-    List<Game> addGamesToUser(Long userId, List<Game> gamesToAdd);
+    List<Game> addGamesToUser(Long userId, List<Game> gamesToAdd);//funfa
+
+    User delete(Long id);
 }

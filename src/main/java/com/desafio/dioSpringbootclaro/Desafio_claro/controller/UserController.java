@@ -2,9 +2,11 @@ package com.desafio.dioSpringbootclaro.Desafio_claro.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -66,5 +68,17 @@ public class UserController {
     public ResponseEntity<List<Game>> addGamesToUser(@PathVariable Long id, @RequestBody List<Game> gamesToAdd) {
         List<Game> addedGames = userService.addGamesToUser(id, gamesToAdd);
         return ResponseEntity.status(HttpStatus.CREATED).body(addedGames);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable Long id) {
+        try {
+            userService.delete(id);
+            return ResponseEntity.ok("User deleted successfully");
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while deleting the user");
+        }
     }
 }
