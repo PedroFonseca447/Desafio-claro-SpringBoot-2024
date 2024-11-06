@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://autorack.proxy.rlwy.net:31050/railway
+    username: postgres
+    password: HjnRGfAMIfDenosYdiqNHRYMglJcxZZr
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect

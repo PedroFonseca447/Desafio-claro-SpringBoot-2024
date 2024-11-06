@@ -1,0 +1,3 @@
+se algum dia for rodar local novamente
+lembra que no json deve alterar para dev no 
+SPRING VALIDATION
