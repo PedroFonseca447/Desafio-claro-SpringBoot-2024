@@ -1,3 +1,15 @@
 se algum dia for rodar local novamente
 lembra que no json deve alterar para dev no 
 SPRING VALIDATION
+
+
+
+{
+    "SPRING_PROFILES_ACTIVE": "prd",
+    "PGHOST": "postgres.railway.internal",
+    "PGPORT": "5432",
+    "PGDATABASE": "railway",
+    "PGUSER": "postgres",
+    "PGPASSWORD": "HjnRGfAMIfDenosYdiqNHRYMglJcxZZr",
+    "PORT": "8080"
+} usar caso algum dia tente novamente subir no railway
